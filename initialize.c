@@ -1,28 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   initialize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/21 23:05:24 by mosakura          #+#    #+#             */
-/*   Updated: 2025/11/23 13:57:48 by mosakura         ###   ########.fr       */
+/*   Created: 2025/11/23 14:13:19 by mosakura          #+#    #+#             */
+/*   Updated: 2025/11/23 15:01:32 by mosakura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int main(int argc, char const *argv[])
-{
-	t_node	*a;
-	t_node	*b;
-
-	a = NULL;
-	b = NULL;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
-		return (1);
-	else if (argc == 2)
-		argv = ft_split(argv[1], ' ');
-
-
-}
