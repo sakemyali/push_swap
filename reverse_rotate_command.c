@@ -1,9 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   reverse_rotate_command.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/07 21:42:30 by mosakura          #+#    #+#             */
+/*   Updated: 2025/12/07 21:45:38 by mosakura         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
- * Bottom to top
-*/
 static void	reverse_rotate(t_stack_node **stack)
 {
 	t_stack_node	*last;

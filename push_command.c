@@ -1,10 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_command.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/07 21:42:21 by mosakura          #+#    #+#             */
+/*   Updated: 2025/12/07 21:48:19 by mosakura         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 
-/*
- * Push a node to the top from src to dest
- * 🚨 attention If stack empty (i.e. NULL)
-*/
 static void	push(t_stack_node **dest, t_stack_node **src)
 {
 	t_stack_node	*node_to_push;
@@ -31,14 +38,20 @@ static void	push(t_stack_node **dest, t_stack_node **src)
 
 void	pa(t_stack_node **a, t_stack_node **b, bool checker)
 {
+	int	i;
+
 	push(a, b);
 	if (!checker)
-		write(1, "pa\n", 3);
+		i = write(1, "pa\n", 3);
+	(void)i;
 }
 
 void	pb(t_stack_node **b, t_stack_node **a, bool checker)
 {
+	int	i;
+
 	push(b, a);
 	if (!checker)
-		write(1, "pb\n", 3);
+		i = write(1, "pb\n", 3);
+	(void)i;
 }

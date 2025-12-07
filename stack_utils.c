@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/07 21:42:39 by mosakura          #+#    #+#             */
+/*   Updated: 2025/12/07 21:45:38 by mosakura         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 #include <limits.h>
@@ -11,10 +22,6 @@ t_stack_node	*find_last_node(t_stack_node *head)
 	return (head);
 }
 
-/*
- * Search for the last node and append 
- * 🚨 Pay attention if the stack empty?
-*/
 void	append_node(t_stack_node **stack, int nbr)
 {
 	t_stack_node	*node;
@@ -40,9 +47,6 @@ void	append_node(t_stack_node **stack, int nbr)
 	}
 }
 
-/*
- * Find the smallest value node
-*/
 t_stack_node	*find_smallest(t_stack_node *stack)
 {
 	long			smallest;
@@ -63,10 +67,6 @@ t_stack_node	*find_smallest(t_stack_node *stack)
 	return (smallest_node);
 }
 
-/*
- * Return the cheapest node 
- * that is already flagged
-*/
 t_stack_node	*return_cheapest(t_stack_node *stack)
 {
 	if (NULL == stack)

@@ -1,14 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   error_free.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/07 21:42:11 by mosakura          #+#    #+#             */
+/*   Updated: 2025/12/07 21:46:48 by mosakura         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdlib.h>
 #include <stdio.h>
 
-/*
- * Ad hoc function to free the 2D array
- * created with the ft_split function
- * ATTENTION
- * You have to start from -1 
-*/
 void	free_matrix(char **argv)
 {
 	int	i;
@@ -21,9 +26,6 @@ void	free_matrix(char **argv)
 	free(argv - 1);
 }
 
-/*
- * Ad hoc function to free a stack
-*/
 void	free_stack(t_stack_node **stack)
 {
 	t_stack_node	*tmp;
@@ -41,23 +43,18 @@ void	free_stack(t_stack_node **stack)
 	*stack = NULL;
 }
 
-/*
- * Matrix starts from -1
- * because i artificially made Up
- * equal to argv
-*/
 void	error_free(t_stack_node **a, char **argv, bool flag_argc_2)
 {
+	int	ok;
+
 	free_stack(a);
 	if (flag_argc_2)
 		free_matrix(argv);
-	write(2, "Error\n", 6);
+	ok = write(2, "Error\n", 6);
+	(void)ok;
 	exit(1);
 }
 
-/*
- * Check if there are some syntactical mistakes
-*/
 int	error_syntax(char *str_nbr)
 {
 	if (!(*str_nbr == '+'
@@ -76,9 +73,6 @@ int	error_syntax(char *str_nbr)
 	return (0);
 }
 
-/*
- * Loop into the stack for some repetition
-*/
 int	error_repetition(t_stack_node *a, int nbr)
 {
 	if (NULL == a)

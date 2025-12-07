@@ -1,11 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/07 21:42:35 by mosakura          #+#    #+#             */
+/*   Updated: 2025/12/07 21:45:38 by mosakura         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stddef.h>
 
-/*
- * Args at the command line are
- * spaced separated strings
-*/
 static int	count_words(char *str, char separator)
 {
 	int		count;
@@ -30,12 +37,6 @@ static int	count_words(char *str, char separator)
 	return (count);
 }
 
-/*
- * I exploit static variables
- * which are basically 
- * "Global private variables"
- * i can access it only via the get_next_word function
-*/
 static char	*get_next_word(char *str, char separator)
 {
 	static int	cursor = 0;
@@ -58,19 +59,6 @@ static char	*get_next_word(char *str, char separator)
 	return (next_str);
 }
 
-/*
- * I recreate an argv in the HEAP
- *
- * +2 because i want to allocate space
- * for the "\0" Placeholder and the final NULL
- *
- * vector_strings-->[p0]-> "\0" Placeholder to mimic argv
- * 				 |->[p1]->"Hello"
- * 				 |->[p2]->"how"
- * 				 |->[p3]->"Are"
- * 				 |->[..]->"..""
- * 				 |->[NULL]
-*/
 char	**ft_split(char *str, char separator)
 {
 	int		words_number;

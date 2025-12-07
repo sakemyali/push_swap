@@ -1,14 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap_command.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/07 21:42:23 by mosakura          #+#    #+#             */
+/*   Updated: 2025/12/07 21:45:38 by mosakura         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
-/*
- * Loop decays once
- * 		~cheapest_node tops is a
- * 		~relative target_node tops in b
-*/
 static void	rotate_both(t_stack_node **a,
 						t_stack_node **b,
 						t_stack_node *cheapest_node)
@@ -31,9 +37,6 @@ static void	reverse_rotate_both(t_stack_node **a,
 	set_current_position(*b);
 }
 
-/*
- * Conclude the rotation of the stacks 
-*/
 void	finish_rotation(t_stack_node **stack,
 							t_stack_node *top_node,
 							char stack_name)
@@ -53,16 +56,10 @@ void	finish_rotation(t_stack_node **stack,
 				rb(stack, false);
 			else
 				rrb(stack, false);
-		}	
+		}
 	}
 }
 
-/*
- * Move the node from 'b' to 'a'
- * with the metadata available in the node
- * 1)Make the target nodes emerge
- * 2)push in A
-*/
 static void	move_nodes(t_stack_node **a, t_stack_node **b)
 {
 	t_stack_node	*cheapest_node;
@@ -79,11 +76,6 @@ static void	move_nodes(t_stack_node **a, t_stack_node **b)
 	pa(a, b, false);
 }
 
-/*
- * ~Push all nodes in B 
- * ~For every configuration choose the "cheapest_node"
- * ~Push everything back in A in order
-*/
 void	push_swap(t_stack_node **a, t_stack_node **b)
 {
 	t_stack_node	*smallest;

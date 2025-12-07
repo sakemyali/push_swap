@@ -1,13 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_init.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/12/07 21:42:37 by mosakura          #+#    #+#             */
+/*   Updated: 2025/12/07 21:45:38 by mosakura         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "push_swap.h"
 #include <limits.h>
 #include <stdlib.h>
 #include <stdio.h>
 
-/*
- *  atol, i need it to check eventual overflows
- *  converting every string into a long value
-*/
 static long	ft_atol(const char *str)
 {
 	long	num;
@@ -36,16 +43,6 @@ static long	ft_atol(const char *str)
 	return (num * isneg);
 }
 
-/*
- * Create the stack with the command line values
- * Checks are embedded in the creation itslef
- * 		~Duplicate values
- * 		~Over|Underflow
- * 		~Syntax errors
- *
- * 	🏁 Flag is useful cause if true, i have the argv in the HEAP to free
- *
-*/
 void	stack_init(t_stack_node **a, char **argv, bool flag_argc_2)
 {
 	long	nbr;
