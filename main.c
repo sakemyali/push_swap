@@ -3,33 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mvrm <mvrm@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: utente <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/11/21 23:05:24 by mosakura          #+#    #+#             */
-/*   Updated: 2025/12/07 17:13:09 by mvrm             ###   ########.fr       */
+/*   Created: 2023/04/01 18:53:55 by utente            #+#    #+#             */
+/*   Updated: 2023/04/06 11:51:15 by utente           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	main(int argc, char const *argv[])
+int	main(int argc, char **argv)
 {
-	t_node	*a;
-	t_node	*b;
+	t_stack_node	*a;
+	t_stack_node	*b;
 
 	a = NULL;
 	b = NULL;
-	if (argc == 1 || (argc == 2 && !argv[1][0]))
+	if (1 == argc || (2 == argc && !argv[1][0]))
 		return (1);
-	else if (argc == 2)
-	{
-		char **tokens = ft_split(argv[1], ' ');
-		if (!tokens)
-			return (1);
-		stack_init(&a, tokens, true);
-	}
-	else
-		stack_init(&a, (char **)(argv + 1), false);
+	else if (2 == argc)
+		argv = ft_split(argv[1], ' ');
+	stack_init(&a, argv + 1, 2 == argc);
 	if (!stack_sorted(a))
 	{
 		if (stack_len(a) == 2)
@@ -40,5 +34,4 @@ int	main(int argc, char const *argv[])
 			push_swap(&a, &b);
 	}
 	free_stack(&a);
-
 }

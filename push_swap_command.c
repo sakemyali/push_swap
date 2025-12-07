@@ -1,35 +1,53 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.c                                        :+:      :+:    :+:   */
+/*   push_swap_command.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: utente <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/05 08:04:43 by mosakura          #+#    #+#             */
-/*   Updated: 2025/12/05 08:07:45 by mosakura         ###   ########.fr       */
+/*   Created: 2023/03/19 11:47:02 by utente            #+#    #+#             */
+/*   Updated: 2023/04/06 11:28:51 by utente           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 
-static void	rotate_both(t_node **a, t_node **b, t_node *cheapest_node)
+/*
+ * Loop decays once
+ * 		~cheapest_node tops is a
+ * 		~relative target_node tops in b
+*/
+static void	rotate_both(t_stack_node **a,
+						t_stack_node **b,
+						t_stack_node *cheapest_node)
 {
-	while (*a != cheapest_node->target
+	while (*a != cheapest_node->target_node
 		&& *b != cheapest_node)
 		rr(a, b, false);
 	set_current_position(*a);
 	set_current_position(*b);
 }
 
-static void	reverse_rotate_both(t_node **a, t_node **b, t_node *cheapest_node)
+static void	reverse_rotate_both(t_stack_node **a,
+								t_stack_node **b,
+								t_stack_node *cheapest_node)
 {
-	while (*a != cheapest_node->target && *b != cheapest_node)
+	while (*a != cheapest_node->target_node
+		&& *b != cheapest_node)
 		rrr(a, b, false);
 	set_current_position(*a);
 	set_current_position(*b);
 }
 
-void	finish_rotation(t_node **stack, t_node *top_node, char stack_name)
+/*
+ * Conclude the rotation of the stacks 
+*/
+void	finish_rotation(t_stack_node **stack,
+							t_stack_node *top_node,
+							char stack_name)
 {
 	while (*stack != top_node)
 	{
@@ -46,30 +64,41 @@ void	finish_rotation(t_node **stack, t_node *top_node, char stack_name)
 				rb(stack, false);
 			else
 				rrb(stack, false);
-		}
+		}	
 	}
 }
 
-static void	move_nodes(t_node **a, t_node **b)
+/*
+ * Move the node from 'b' to 'a'
+ * with the metadata available in the node
+ * 1)Make the target nodes emerge
+ * 2)push in A
+*/
+static void	move_nodes(t_stack_node **a, t_stack_node **b)
 {
-	t_node	*cheapest_node;
+	t_stack_node	*cheapest_node;
 
 	cheapest_node = return_cheapest(*b);
 	if (cheapest_node->above_median
-		&& cheapest_node->target->above_median)
+		&& cheapest_node->target_node->above_median)
 		rotate_both(a, b, cheapest_node);
 	else if (!(cheapest_node->above_median)
-		&& !(cheapest_node->target->above_median))
+		&& !(cheapest_node->target_node->above_median))
 		reverse_rotate_both(a, b, cheapest_node);
 	finish_rotation(b, cheapest_node, 'b');
-	finish_rotation(a, cheapest_node->target, 'a');
+	finish_rotation(a, cheapest_node->target_node, 'a');
 	pa(a, b, false);
 }
 
-void	push_swap(t_node **a, t_node **b)
+/*
+ * ~Push all nodes in B 
+ * ~For every configuration choose the "cheapest_node"
+ * ~Push everything back in A in order
+*/
+void	push_swap(t_stack_node **a, t_stack_node **b)
 {
-	t_node	*smallest;
-	int		len_a;
+	t_stack_node	*smallest;
+	int				len_a;
 
 	len_a = stack_len(*a);
 	if (len_a == 5)

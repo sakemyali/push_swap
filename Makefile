@@ -1,23 +1,45 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: utente <marvin@42.fr>                      +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/04/08 12:14:59 by utente            #+#    #+#              #
+#    Updated: 2023/04/08 12:36:39 by utente           ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = push_swap
+ARCHIVE = push_swap.a
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-SRCS = commands1.c commands2.c commands3.c error_handling.c ft_split.c initialize.c main.c sort.c utils1.c utils2.c
+CFLAGS = -Wall -Werror -Wextra -g -O2 
+MAKE_LIB = ar -rcs
+
+SRCS = $(wildcard *.c)
 OBJS = $(SRCS:.c=.o)
 
-all: $(NAME)
+all : $(NAME)
 
-$(NAME): $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
+$(NAME) : $(ARCHIVE)
+	$(CC) $< -o $@
 
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+$(ARCHIVE) : $(OBJS)
+	$(MAKE_LIB) $(ARCHIVE) $^
 
-clean:
-	rm -f $(OBJS)
+%.o : %.c 
+	$(CC) $(CFLAGS) -c $< -o $@ 
 
-fclean: clean
+bonus : 
+	cd ../checker && make
+	
+clean :
+	rm -f $(OBJS) $(ARCHIVE)
+
+fclean : clean
 	rm -f $(NAME)
+	cd ../checker && make fclean
 
-re: fclean all
+re : fclean all
 
-.PHONY: all clean fclean re
+.PHONY : all clean fclea re
