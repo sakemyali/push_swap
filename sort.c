@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mvrm <mvrm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 08:04:01 by mosakura          #+#    #+#             */
-/*   Updated: 2025/12/05 08:10:22 by mosakura         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:13:09 by mvrm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,84 @@ void	push_swap(t_node **a, t_node **b)
 	else
 		while (*a != smallest)
 			rra(a, false);
+}
+
+bool	stack_sorted(t_node *a)
+{
+	if (!a)
+		return (true);
+	while (a->next)
+	{
+		if (a->value > a->next->value)
+			return (false);
+		a = a->next;
+	}
+	return (true);
+}
+
+void	tiny_sort(t_node **a)
+{
+	/* simple 2-3 element sort using available ops */
+	if (stack_len(*a) == 2)
+	{
+		if ((*a)->value > (*a)->next->value)
+			sa(a, true);
+		return ;
+	}
+	/* 3 elements - brute force minimal sequence */
+	while (!stack_sorted(*a))
+	{
+		if ((*a)->value > (*a)->next->value)
+			sa(a, true);
+		else if ((*a)->next->value > (*a)->next->next->value)
+			rra(a, true);
+		else
+			ra(a, true);
+	}
+}
+
+void	free_stack(t_node **a)
+{
+	t_node *tmp;
+
+	if (!a || !*a)
+		return;
+	while (*a)
+	{
+		tmp = (*a)->next;
+		free(*a);
+		*a = tmp;
+	}
+	*a = NULL;
+}
+
+void	free_matrix(char **m)
+{
+	int i = 0;
+
+	if (!m)
+		return;
+	while (m[i])
+		free(m[i++]);
+	free(m);
+}
+
+void	handle_five(t_node **a, t_node **b)
+{
+	/* move two smallest to b, tiny_sort a, then pa twice */
+	while (stack_len(*a) > 3)
+	{
+		t_node *small = find_smallest(*a);
+		set_current_position(*a);
+		if (small->above_median)
+			while (*a != small)
+				ra(a, true);
+		else
+			while (*a != small)
+				rra(a, true);
+		pb(b, a, true);
+	}
+	tiny_sort(a);
+	while (*b)
+		pa(a, b, true);
 }

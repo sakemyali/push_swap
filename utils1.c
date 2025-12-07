@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils1.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mvrm <mvrm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 06:21:19 by mosakura          #+#    #+#             */
-/*   Updated: 2025/12/05 06:43:00 by mosakura         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:13:08 by mvrm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,13 @@ void	append_node(t_node **stack, int nbr)
 		return ;
 	node->next = NULL;
 	node->value = nbr;
+	/* initialize metadata to safe defaults */
+	node->position = 0;
+	node->f_idx = 0;
+	node->price = 0;
+	node->above_median = false;
+	node->cheapest = false;
+	node->target = NULL;
 	if (NULL == *stack)
 	{
 		*stack = node;
@@ -92,4 +99,9 @@ t_node	*find_last_node(t_node *head)
 	while (head->next)
 		head = head->next;
 	return (head);
+}
+
+int	stack_len(t_node *stack)
+{
+	return (ft_lstsize(stack));
 }

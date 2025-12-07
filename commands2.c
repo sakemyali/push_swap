@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands2.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mvrm <mvrm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 05:45:42 by mosakura          #+#    #+#             */
-/*   Updated: 2025/12/05 08:34:06 by mosakura         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:13:09 by mvrm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,48 +14,58 @@
 
 void	ra(t_node **a, bool bl)
 {
-	t_node	*last_node;
-	int		len;
+	t_node  *first;
+	t_node  *second;
+	t_node  *last;
+	int     len;
 
-	len = stack_len(*a);
-	if (NULL == a || NULL == *a || 1 == len)
+	if (a == NULL || *a == NULL || (*a)->next == NULL)
 		return ;
-	last_node = find_last_node(*a);
-	last_node->next = *a;
-	*a = (*a)->next;
-	(*a)->prev = NULL;
-	last_node->next->prev = last_node;
-	last_node->next->next = NULL;
+	len = stack_len(*a);
+	if (len == 1)
+		return ;
+	first = *a;
+	second = first->next;
+	last = find_last_node(first);
+	/* detach first and move it to end */
+	last->next = first;
+	first->prev = last;
+	first->next = NULL;
+	second->prev = NULL;
+	*a = second;
 	if (bl)
 		write(STDOUT_FILENO, "ra\n", 3);
 }
 
 void	rb(t_node **b, bool bl)
 {
-	t_node	*last_node;
-	int		len;
+	t_node  *first;
+	t_node  *second;
+	t_node  *last;
 
-	len = stack_len(*b);
-	if (NULL == b || NULL == *b || 1 == len)
+	if (b == NULL || *b == NULL || (*b)->next == NULL)
 		return ;
-	last_node = find_last_node(*b);
-	last_node->next = *b;
-	*b = (*b)->next;
-	(*b)->prev = NULL;
-	last_node->next->prev = last_node;
-	last_node->next->next = NULL;
+	first = *b;
+	second = first->next;
+	last = find_last_node(first);
+	last->next = first;
+	first->prev = last;
+	first->next = NULL;
+	second->prev = NULL;
+	*b = second;
 	if (bl)
 		write(STDOUT_FILENO, "rb\n", 3);
 }
 
-void	rr(t_node **a, t_node **b)
+void	rr(t_node **a, t_node **b, bool bl)
 {
 	ra(a, false);
 	rb(b, false);
-	write(STDOUT_FILENO, "rr\n", 3);
+	if (bl)
+		write(STDOUT_FILENO, "rr\n", 3);
 }
 
-void	rra(t_node **a)
+void	rra(t_node **a, bool bl)
 {
 	t_node	*last;
 	int		len;
@@ -69,9 +79,11 @@ void	rra(t_node **a)
 	last->prev = NULL;
 	*a = last;
 	last->next->prev = last;
+	if (bl)
+		write(STDOUT_FILENO, "rra\n", 4);
 }
 
-void	rrb(t_node **b)
+void	rrb(t_node **b, bool bl)
 {
 	t_node	*last;
 	int		len;
@@ -85,4 +97,6 @@ void	rrb(t_node **b)
 	last->prev = NULL;
 	*b = last;
 	last->next->prev = last;
+	if (bl)
+		write(STDOUT_FILENO, "rrb\n", 4);
 }

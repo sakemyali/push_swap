@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mvrm <mvrm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 07:09:08 by mosakura          #+#    #+#             */
-/*   Updated: 2025/12/05 07:09:10 by mosakura         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:15:00 by mvrm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "push_swap.h"
 
 long	ft_atol(const char *str)
 {
@@ -36,4 +38,14 @@ long	ft_atol(const char *str)
 		i++;
 	}
 	return (num * isneg);
+}
+
+size_t	ft_strlen(const char *s)
+{
+	size_t i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+		i++;
+	return (i);
 }

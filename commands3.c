@@ -3,17 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   commands3.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mvrm <mvrm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 05:45:40 by mosakura          #+#    #+#             */
-/*   Updated: 2025/12/05 07:07:53 by mosakura         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:13:09 by mvrm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rrr(t_node **a, t_node **b)
+void	rrr(t_node **a, t_node **b, bool bl)
 {
-	rra(a);
-	rrb(b);
+	rra(a, false);
+	rrb(b, false);
+	if (bl)
+		write(STDOUT_FILENO, "rrr\n", 4);
 }

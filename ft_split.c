@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mvrm <mvrm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/23 13:53:51 by mosakura          #+#    #+#             */
-/*   Updated: 2025/11/23 15:00:26 by mosakura         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:13:08 by mvrm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ static char	**freeall(char **res, size_t j)
 {
 	if (res)
 	{
-		while (0 < j)
-			free(res[j--]);
+		while (j > 0)
+			free(res[--j]);
 		free(res);
 	}
 	return (NULL);

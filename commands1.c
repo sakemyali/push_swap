@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   commands1.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mvrm <mvrm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/05 05:45:45 by mosakura          #+#    #+#             */
-/*   Updated: 2025/12/05 08:32:42 by mosakura         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:13:09 by mvrm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,52 +14,61 @@
 
 void	sa(t_node **a, bool bl)
 {
-	int	len;
+	t_node  *first;
+	t_node  *second;
+	t_node  *third;
 
-	len = ft_lstsize(*a);
-	if (!a || !*a || 1 == len)
+	if (a == NULL || *a == NULL || (*a)->next == NULL)
 		return ;
-	*a = (*a)->next;
-	(*a)->prev->prev = *a;
-	(*a)->prev->next = (*a)->next;
-	if ((*a)->next)
-		(*a)->next->prev = (*a)->prev;
-	(*a)->next = (*a)->prev;
-	(*a)->prev = NULL;
+	first = *a;
+	second = first->next;
+	third = second->next;
+	/* perform swap */
+	second->prev = NULL;
+	second->next = first;
+	first->prev = second;
+	first->next = third;
+	if (third)
+		third->prev = first;
+	*a = second;
 	if (bl)
 		write(STDOUT_FILENO, "sa\n", 3);
 }
 
 void	sb(t_node **b, bool bl)
 {
-	int	len;
+	t_node  *first;
+	t_node  *second;
+	t_node  *third;
 
-	len = ft_lstsize(*b);
-	if (!b || !*b || 1 == len)
+	if (b == NULL || *b == NULL || (*b)->next == NULL)
 		return ;
-	*b = (*b)->next;
-	(*b)->prev->prev = *b;
-	(*b)->prev->next = (*b)->next;
-	if ((*b)->next)
-		(*b)->next->prev = (*b)->prev;
-	(*b)->next = (*b)->prev;
-	(*b)->prev = NULL;
+	first = *b;
+	second = first->next;
+	third = second->next;
+	second->prev = NULL;
+	second->next = first;
+	first->prev = second;
+	first->next = third;
+	if (third)
+		third->prev = first;
+	*b = second;
 	if (bl)
 		write(STDOUT_FILENO, "sb\n", 3);
 }
 
-void	ss(t_node **a, t_node **b)
+void	ss(t_node **a, t_node **b, bool bl)
 {
 	sa(a, false);
 	sb(b, false);
-	write(STDOUT_FILENO, "ss\n", 3);
+	if (bl)
+		write(STDOUT_FILENO, "ss\n", 3);
 }
 
-void	pa(t_node **a, t_node **b)
+void	pa(t_node **a, t_node **b, bool bl)
 {
 	t_node	*node_to_push;
-
-	if (NULL == *b)
+	if (b == NULL || *b == NULL)
 		return ;
 	node_to_push = *b;
 	*b = (*b)->next;
@@ -77,14 +86,14 @@ void	pa(t_node **a, t_node **b)
 		node_to_push->next->prev = node_to_push;
 		*a = node_to_push;
 	}
-	write(STDOUT_FILENO, "pa\n", 3);
+	if (bl)
+		write(STDOUT_FILENO, "pa\n", 3);
 }
 
-void	pb(t_node **b, t_node **a)
+void	pb(t_node **b, t_node **a, bool bl)
 {
 	t_node	*node_to_push;
-
-	if (NULL == *a)
+	if (a == NULL || *a == NULL)
 		return ;
 	node_to_push = *a;
 	*a = (*a)->next;
@@ -102,5 +111,6 @@ void	pb(t_node **b, t_node **a)
 		node_to_push->next->prev = node_to_push;
 		*b = node_to_push;
 	}
-	write(STDOUT_FILENO, "pb\n", 3);
+	if (bl)
+		write(STDOUT_FILENO, "pb\n", 3);
 }

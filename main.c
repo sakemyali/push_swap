@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mosakura <mosakura@student.42tokyo.jp>     +#+  +:+       +#+        */
+/*   By: mvrm <mvrm@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/21 23:05:24 by mosakura          #+#    #+#             */
-/*   Updated: 2025/12/05 08:08:24 by mosakura         ###   ########.fr       */
+/*   Updated: 2025/12/07 17:13:09 by mvrm             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,14 @@ int	main(int argc, char const *argv[])
 	if (argc == 1 || (argc == 2 && !argv[1][0]))
 		return (1);
 	else if (argc == 2)
-		argv = ft_split(argv[1], ' ');
-	stack_init(&a, argv + 1, 2 == argc);
+	{
+		char **tokens = ft_split(argv[1], ' ');
+		if (!tokens)
+			return (1);
+		stack_init(&a, tokens, true);
+	}
+	else
+		stack_init(&a, (char **)(argv + 1), false);
 	if (!stack_sorted(a))
 	{
 		if (stack_len(a) == 2)
