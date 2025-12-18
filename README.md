@@ -119,12 +119,3 @@ The code arranges operations in modular command functions so different strategie
 
 - Manual testing: run `./push_swap` with sample inputs and inspect the operation sequence.
 - Automated testing: create a small script that applies the operations to the input and checks that the final stack is sorted.
-
-## Notes and next steps
-
-- If you want a `checker` program to validate the moves, create a separate binary that reads the same input and the operations from stdin and applies them, reporting OK or KO.
-- For better move-count performance, experiment with chunk sizes or a radix approach for large input sets.
-
----
-
-This README focuses on what the repository provides and how to build and use it. If you want, I can also add a `checker` program template or example test scripts.
